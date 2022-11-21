@@ -1,6 +1,5 @@
 package com.miler.aop;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
@@ -9,12 +8,12 @@ import org.springframework.stereotype.Component;
 public class Email// implements EmailService
 {
 
-    private JavaMailSender emailSender;
+    private JavaMailSender emailSender = new AspectFilms().getJavaMailSender();;
 
-    @Autowired
-    public Email(JavaMailSender emailSender) {
-        this.emailSender = emailSender;
-    }
+    //@Autowired
+//    public Email(JavaMailSender emailSender) {
+//        this.emailSender = new AspectFilms().getJavaMailSender();
+//    }
 
     public void sendSimpleMessageByMe(String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();

@@ -13,6 +13,7 @@ import java.util.Properties;
 @Component
 public class AspectFilms {
 
+
     @Bean
     public JavaMailSender getJavaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
@@ -20,7 +21,7 @@ public class AspectFilms {
         mailSender.setPort(587);
 
         mailSender.setUsername("dilerus@gmail.com");
-        //mailSender.setPassword("password");
+        mailSender.setPassword("password");
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
@@ -35,7 +36,7 @@ public class AspectFilms {
     @After("@annotation(SendMail)")
     public void SendMail(){
         System.out.println("sending mail");
-        Email email = new Email(new JavaMailSender());
+        Email email = new Email();
         email.sendSimpleMessageByMe("lukasz.miler@capgemini.com", "test", "testbody");
     }
 
